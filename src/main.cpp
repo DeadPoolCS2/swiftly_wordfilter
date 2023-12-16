@@ -31,28 +31,17 @@ void OnProgramLoad(const char *pluginName, const char *mainFilePath)
 
 bool OnPlayerChat(Player *player, const char *text, bool teamonly)
 {
-    std::string message(text);
-    std::transform(message.begin(), message.end(), message.begin(), ::tolower);
-
-    bool messageChanged = false;
+    std::string message(ToLower(text));
 
     uint32_t wordCount = config->FetchArraySize("swiftly_wordfilter.words");
 
-    for (uint32_t i = 0; i < wordCount; ++i) {
-        std::string wordKey = "swiftly_wordfilter.words[" + std::to_string(i) + "]";
-        std::string word = config->Fetch<const char*>(wordKey.c_str());
+    for (uint32_t i = 0; i < wordCount; i++) {
+        std::string word = config->Fetch<const char*>("swiftly_wordfilter.words[%d]", i);
 
-        std::size_t found = message.find(word);
-        if (found != std::string::npos) {
-            message = FetchTranslation("wordfilter.notallowed");
-            messageChanged = true;
-            break;
+        if (message.find(word) != std::string::npos) {
+            player->SendMsg(HUD_PRINTTALK, FetchTranslation("wordfilter.notallowed"));
+            return false;
         }
-    }
-
-    if (messageChanged) {
-        player->SendMsg(HUD_PRINTTALK, message.c_str());
-        return false;
     }
 
     return true;
