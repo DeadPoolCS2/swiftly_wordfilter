@@ -19,7 +19,6 @@
   </p>
 </p>
 
-![Downloads](https://img.shields.io/github/downloads/blu133721/swiftly_wordfilter/total) ![Contributors](https://img.shields.io/github/contributors/blu133721/swiftly_wordfilter?color=dark-green) ![Issues](https://img.shields.io/github/issues/blu133721/swiftly_wordfilter) ![License](https://img.shields.io/github/license/blu133721/swiftly_wordfilter) 
 
 ### Installation 👀
 
