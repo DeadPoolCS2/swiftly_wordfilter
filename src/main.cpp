@@ -32,7 +32,6 @@ void OnProgramLoad(const char *pluginName, const char *mainFilePath)
 bool OnPlayerChat(Player *player, const char *text, bool teamonly)
 {
     std::string message(ToLower(text));
-
     uint32_t wordCount = config->FetchArraySize("swiftly_wordfilter.words");
 
     for (uint32_t i = 0; i < wordCount; i++) {
